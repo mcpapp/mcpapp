@@ -19,6 +19,8 @@
     "build": "vp pack",
     "check": "vp check",
     "dev": "vp pack --watch",
+    "prepublishOnly": "vp run build",
+    "prepare": "vp config",
     "test": "vp test"
   },
   "dependencies": {
@@ -62,5 +64,6 @@
     "zod": {
       "optional": true
     }
-  }
+  },
+  "packageManager": "pnpm@11.1.2"
 }
