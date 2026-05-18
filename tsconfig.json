@@ -1,7 +1,21 @@
 {
-  "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "declaration": false,
+    "exactOptionalPropertyTypes": true,
     "jsx": "react-jsx",
-    "jsxImportSource": "react"
-  }
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "noEmit": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
+    "noUncheckedIndexedAccess": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "target": "ESNext",
+    "types": ["vitest/globals", "@testing-library/jest-dom"]
+  },
+  "include": ["src", "test", "vite.config.ts"]
 }
