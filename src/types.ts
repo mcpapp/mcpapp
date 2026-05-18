@@ -51,6 +51,7 @@ export type MCPAppRuntime = {
   connected: boolean;
   connecting: boolean;
   error: Error | null;
+  hostCapabilities: HostCapabilities | undefined;
   hostContext: HostContext | undefined;
   loading: boolean;
   registry: Registry | undefined;
