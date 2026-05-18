@@ -82,6 +82,7 @@ export function useNativeMCPApp({
       }
 
       setLoading(true);
+      setRuntimeError(null);
 
       try {
         const result = await app.callServerTool({
@@ -92,6 +93,7 @@ export function useNativeMCPApp({
         if (nextSpec) {
           setSpec(nextSpec);
         }
+        setRuntimeError(null);
         setLoading(false);
         return nextSpec;
       } catch (value) {
@@ -109,6 +111,7 @@ export function useNativeMCPApp({
     connected: isConnected,
     connecting: !isConnected && !runtimeError,
     error: runtimeError,
+    hostCapabilities: app?.getHostCapabilities(),
     hostContext,
     loading,
     registry: undefined,

@@ -38,7 +38,7 @@ function stableArgsKey(args: Record<string, unknown>): string {
 }
 
 export function WebHost({
-  capabilities: _capabilities = defaultBrowserCapabilities,
+  capabilities = defaultBrowserCapabilities,
   children,
   connect = true,
   endpoint = defaultEndpoint,
@@ -77,6 +77,7 @@ export function WebHost({
 
     clientRef.current = client;
     transportRef.current = transport;
+    setRuntimeError(null);
 
     if (!initialSpec) {
       setLoading(true);
@@ -103,6 +104,7 @@ export function WebHost({
 
       if (!cancelled) {
         setSpec(nextSpec);
+        setRuntimeError(null);
         setLoading(false);
       }
     })().catch((value: unknown) => {
@@ -132,6 +134,7 @@ export function WebHost({
         }
 
         setLoading(true);
+        setRuntimeError(null);
 
         try {
           const result = await client.callTool({ name, arguments: args });
@@ -139,6 +142,7 @@ export function WebHost({
           if (nextSpec) {
             setSpec(nextSpec);
           }
+          setRuntimeError(null);
           setLoading(false);
           return nextSpec;
         } catch (value) {
@@ -150,12 +154,13 @@ export function WebHost({
       connected,
       connecting: loading && !runtimeError,
       error: runtimeError,
+      hostCapabilities: capabilities,
       hostContext,
       loading,
       registry,
       spec,
     }),
-    [connected, hostContext, loading, registry, runtimeError, spec],
+    [capabilities, connected, hostContext, loading, registry, runtimeError, spec],
   );
 
   if (runtimeError) {

@@ -2,7 +2,7 @@ import type { ComponentRegistry, ComponentRenderProps, Spec } from "@json-render
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
-import { MCPApp, WebHost } from "../src";
+import { MCPApp, WebHost, useMCPHostRuntime } from "../src";
 
 const Text = ({ element }: ComponentRenderProps<{ value: string }>) => <p>{element.props.value}</p>;
 
@@ -99,5 +99,21 @@ describe("MCPApp", () => {
     );
 
     expect(screen.getByText("Override: Ada Lovelace")).toBeInTheDocument();
+  });
+
+  it("exposes WebHost capabilities on the host runtime", () => {
+    const RuntimeCapabilities = () => {
+      const runtime = useMCPHostRuntime();
+
+      return <p>{runtime?.hostCapabilities?.openLinks ? "links supported" : "links blocked"}</p>;
+    };
+
+    render(
+      <WebHost connect={false} capabilities={{ openLinks: {} }} initialSpec={panelSpec}>
+        <RuntimeCapabilities />
+      </WebHost>,
+    );
+
+    expect(screen.getByText("links supported")).toBeInTheDocument();
   });
 });
