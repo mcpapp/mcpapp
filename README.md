@@ -55,3 +55,7 @@ npm test
 npm run typecheck
 npm run build
 ```
+
+This repo uses Vite+ (`vp`) for test and build commands. Type checking runs on
+the TypeScript 7 native preview through `tsgo`; `typescript` remains installed
+for ecosystem tools that still import the TypeScript 6 API.
