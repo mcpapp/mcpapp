@@ -19,6 +19,9 @@ const external = [
 ];
 
 export default defineConfig({
+  staged: {
+    "*": "vp check --fix",
+  },
   plugins: [
     react(),
     babel({
@@ -56,13 +59,17 @@ export default defineConfig({
     },
   },
   pack: {
-    dts: true,
+    dts: {
+      tsgo: true,
+    },
     entry: {
       index: "src/index.ts",
       server: "src/server.ts",
       web: "src/web.ts",
     },
+    exports: true,
     format: ["esm"],
     sourcemap: true,
   },
+  fmt: {},
 });
