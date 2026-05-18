@@ -1,8 +1,4 @@
-import {
-  JSONUIProvider,
-  Renderer,
-  createStateStore,
-} from "@json-render/react";
+import { JSONUIProvider, Renderer, createStateStore } from "@json-render/react";
 import { useCallback, useMemo, useRef } from "react";
 import { useMCPHostRuntime } from "../context";
 import { defaultWebRegistry } from "../default-web-registry";
@@ -32,29 +28,15 @@ function RuntimeMCPApp({
   const resolvedRegistry = registry ?? runtime.registry ?? defaultWebRegistry;
   const activeError = runtime.error;
 
-  const controlledStore = useMemo(
-    () => (state ? stateAdapterToStore(state) : null),
-    [state],
-  );
-  const localStore = useMemo(
-    () => createStateStore(runtime.spec?.state ?? {}),
-    [runtime.spec],
-  );
+  const controlledStore = useMemo(() => (state ? stateAdapterToStore(state) : null), [state]);
+  const localStore = useMemo(() => createStateStore(runtime.spec?.state ?? {}), [runtime.spec]);
   const store: StateStore = controlledStore ?? localStore;
   const storeRef = useLatestRef(store);
 
-  const setState = useCallback(
-    () => createSetState(storeRef.current),
-    [storeRef],
-  );
+  const setState = useCallback(() => createSetState(storeRef.current), [storeRef]);
 
   const actionHandlers = useMemo(
-    () =>
-      resolveActionHandlers(
-        handlers,
-        setState,
-        () => storeRef.current.getSnapshot(),
-      ),
+    () => resolveActionHandlers(handlers, setState, () => storeRef.current.getSnapshot()),
     [handlers, setState, storeRef],
   );
   const providerOptions = {
@@ -63,9 +45,7 @@ function RuntimeMCPApp({
     ...(functions ? { functions } : {}),
     ...(validationFunctions ? { validationFunctions } : {}),
   };
-  const rendererOptions = {
-    ...(fallback ? { fallback } : {}),
-  };
+  const rendererOptions = fallback ? { fallback } : {};
 
   if (activeError) {
     return <>{renderError ? renderError(activeError) : <DefaultError error={activeError} />}</>;
@@ -76,11 +56,7 @@ function RuntimeMCPApp({
   }
 
   return (
-    <JSONUIProvider
-      registry={resolvedRegistry}
-      store={store}
-      {...providerOptions}
-    >
+    <JSONUIProvider registry={resolvedRegistry} store={store} {...providerOptions}>
       <Renderer
         loading={runtime.loading}
         registry={resolvedRegistry}

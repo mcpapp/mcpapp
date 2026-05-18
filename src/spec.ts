@@ -9,11 +9,7 @@ const isRecord = (value: unknown): value is Record<string, unknown> =>
   value !== null && typeof value === "object";
 
 export function isSpec(value: unknown): value is Spec {
-  return (
-    isRecord(value) &&
-    typeof value.root === "string" &&
-    isRecord(value.elements)
-  );
+  return isRecord(value) && typeof value.root === "string" && isRecord(value.elements);
 }
 
 function parseJson(text: string): unknown {
@@ -26,9 +22,7 @@ function parseJson(text: string): unknown {
 
 function firstTextContent(result: ToolResultLike): string | null {
   const content = result.content?.find((item) => item.type === "text");
-  return content?.type === "text" && typeof content.text === "string"
-    ? content.text
-    : null;
+  return content?.type === "text" && typeof content.text === "string" ? content.text : null;
 }
 
 export function extractSpec(value: unknown): Spec | null {
