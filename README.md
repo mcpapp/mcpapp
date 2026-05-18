@@ -51,14 +51,12 @@ import { buildAppHtml, createMcpApp } from "@mcpapp/react/server";
 
 ```bash
 npm install
+npm run check
 npm test
-npm run lint
-npm run format
-npm run typecheck
 npm run build
 ```
 
 This repo uses Vite+ (`vp`) for development, checks, tests, and packaging.
-`vp check`/`vp lint` provide type-aware checks through the TypeScript Go
-toolchain; `typescript` remains installed for ecosystem tools that still import
-the TypeScript 6 API.
+`vp check` runs format, lint, and type checks together, including type-aware
+checks through the TypeScript Go toolchain. `typescript` remains installed for
+ecosystem tools that still import the TypeScript 6 API.

@@ -25,11 +25,9 @@
   },
   "scripts": {
     "build": "vp pack",
+    "check": "vp check",
     "dev": "vp pack --watch",
-    "format": "vp fmt",
-    "lint": "vp lint",
-    "test": "vp test",
-    "typecheck": "vp check --no-fmt --no-lint"
+    "test": "vp test"
   },
   "dependencies": {
     "@json-render/core": "0.19.0",
