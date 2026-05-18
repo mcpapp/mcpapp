@@ -1,5 +1,6 @@
-import react from "@vitejs/plugin-react";
-import { defineConfig } from "vitest/config";
+import babel from "@rolldown/plugin-babel";
+import react, { reactCompilerPreset } from "@vitejs/plugin-react";
+import { defineConfig } from "vite-plus";
 
 const external = [
   "@json-render/core",
@@ -19,10 +20,9 @@ const external = [
 
 export default defineConfig({
   plugins: [
-    react({
-      babel: {
-        plugins: [["babel-plugin-react-compiler", { target: "19" }]],
-      },
+    react(),
+    babel({
+      presets: [reactCompilerPreset()],
     }),
   ],
   build: {
@@ -47,5 +47,15 @@ export default defineConfig({
   test: {
     environment: "jsdom",
     setupFiles: ["test/setup.ts"],
+  },
+  pack: {
+    dts: true,
+    entry: {
+      index: "src/index.ts",
+      server: "src/server.ts",
+      web: "src/web.ts",
+    },
+    format: ["esm"],
+    sourcemap: true,
   },
 });
