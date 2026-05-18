@@ -3,8 +3,5 @@ dist/
 .astro/
 .DS_Store
 .playwright-mcp/
-.zed/
-!.zed/
-!.zed/settings.json
 *.png
 !public/*.png
