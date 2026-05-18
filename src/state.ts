@@ -1,18 +1,10 @@
 import { getByPath } from "@json-render/core";
 import type { SetState, StateModel, StateStore } from "@json-render/react";
-import type {
-  MCPAppActionHandlers,
-  ResolvedActionHandlers,
-  StateAdapter,
-} from "./types";
+import type { MCPAppActionHandlers, ResolvedActionHandlers, StateAdapter } from "./types";
 
-const escapeJsonPointerToken = (token: string) =>
-  token.replace(/~/g, "~0").replace(/\//g, "~1");
+const escapeJsonPointerToken = (token: string) => token.replace(/~/g, "~0").replace(/\//g, "~1");
 
-function toTopLevelUpdates(
-  previous: StateModel,
-  next: StateModel,
-): Record<string, unknown> {
+function toTopLevelUpdates(previous: StateModel, next: StateModel): Record<string, unknown> {
   const previousKeys = new Set(Object.keys(previous));
   const nextKeys = new Set(Object.keys(next));
   const keys =

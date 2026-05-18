@@ -4,23 +4,15 @@ import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 import { MCPApp, WebHost } from "../src";
 
-const Text = ({ element }: ComponentRenderProps<{ value: string }>) => (
-  <p>{element.props.value}</p>
-);
+const Text = ({ element }: ComponentRenderProps<{ value: string }>) => <p>{element.props.value}</p>;
 
-const Button = ({
-  element,
-  emit,
-}: ComponentRenderProps<{ label: string }>) => (
+const Button = ({ element, emit }: ComponentRenderProps<{ label: string }>) => (
   <button type="button" onClick={() => emit("press")}>
     {element.props.label}
   </button>
 );
 
-const Panel = ({
-  children,
-  element,
-}: ComponentRenderProps<{ title: string }>) => (
+const Panel = ({ children, element }: ComponentRenderProps<{ title: string }>) => (
   <section aria-label={element.props.title}>
     <h1>{element.props.title}</h1>
     {children}
@@ -73,9 +65,7 @@ describe("MCPApp", () => {
       </WebHost>,
     );
 
-    expect(
-      screen.getByRole("heading", { name: "Customer profile" }),
-    ).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Customer profile" })).toBeInTheDocument();
     expect(screen.getByText("Ada Lovelace")).toBeInTheDocument();
   });
 

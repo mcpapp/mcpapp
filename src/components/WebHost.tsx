@@ -19,8 +19,7 @@ export const defaultBrowserCapabilities = {
   serverTools: { listChanged: true },
 } satisfies HostCapabilities;
 
-const canUseBrowserTransport = () =>
-  typeof window !== "undefined" && typeof fetch === "function";
+const canUseBrowserTransport = () => typeof window !== "undefined" && typeof fetch === "function";
 
 function endpointUrl(endpoint: string | URL): URL {
   if (endpoint instanceof URL) {
@@ -39,7 +38,7 @@ function stableArgsKey(args: Record<string, unknown>): string {
 }
 
 export function WebHost({
-  capabilities = defaultBrowserCapabilities,
+  capabilities: _capabilities = defaultBrowserCapabilities,
   children,
   connect = true,
   endpoint = defaultEndpoint,
@@ -73,10 +72,7 @@ export function WebHost({
     }
 
     let cancelled = false;
-    const client = new Client(
-      { name: "mcpapp-web-host", version: "0.1.0" },
-      { capabilities: {} },
-    );
+    const client = new Client({ name: "mcpapp-web-host", version: "0.1.0" }, { capabilities: {} });
     const transport = new StreamableHTTPClientTransport(endpointUrl(endpoint), transportOptions);
 
     clientRef.current = client;

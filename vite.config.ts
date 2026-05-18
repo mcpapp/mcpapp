@@ -48,6 +48,13 @@ export default defineConfig({
     environment: "jsdom",
     setupFiles: ["test/setup.ts"],
   },
+  lint: {
+    ignorePatterns: ["dist/**"],
+    options: {
+      typeAware: true,
+      typeCheck: true,
+    },
+  },
   pack: {
     dts: true,
     entry: {

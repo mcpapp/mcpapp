@@ -43,10 +43,7 @@ export type SandboxPolicy =
 export type HostCapabilities = McpUiHostCapabilities;
 export type HostContext = McpUiHostContext;
 
-export type ToolCaller = (
-  name: string,
-  args?: Record<string, unknown>,
-) => Promise<Spec | null>;
+export type ToolCaller = (name: string, args?: Record<string, unknown>) => Promise<Spec | null>;
 
 export type MCPAppRuntime = {
   app: App | null;
@@ -90,10 +87,7 @@ export type WebHostProps = {
   transportOptions?: StreamableHTTPClientTransportOptions;
 };
 
-export type ResolvedActionHandlers = Record<
-  string,
-  (params: Record<string, unknown>) => Promise<unknown> | unknown
->;
+export type ResolvedActionHandlers = Record<string, (params: Record<string, unknown>) => unknown>;
 
 export type RuntimeStateAccess = {
   getSetState(): SetState | undefined;

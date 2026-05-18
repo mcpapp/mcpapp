@@ -2,33 +2,34 @@
   "name": "@mcpapp/react",
   "version": "0.1.0",
   "description": "React runtime for MCP Apps rendered with json-render.",
-  "type": "module",
   "license": "MIT",
-  "sideEffects": false,
   "files": [
     "dist",
     "README.md"
   ],
+  "type": "module",
+  "sideEffects": false,
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs"
     },
     "./web": {
-      "types": "./dist/web.d.ts",
-      "import": "./dist/web.js"
+      "types": "./dist/web.d.mts",
+      "import": "./dist/web.mjs"
     },
     "./server": {
-      "types": "./dist/server.d.ts",
-      "import": "./dist/server.js"
+      "types": "./dist/server.d.mts",
+      "import": "./dist/server.mjs"
     }
   },
   "scripts": {
-    "build": "vp build && tsgo -p tsconfig.build.json",
-    "dev": "vp build --watch",
-    "test": "vp test run",
-    "test:watch": "vp test",
-    "typecheck": "tsgo --noEmit"
+    "build": "vp pack",
+    "dev": "vp pack --watch",
+    "format": "vp fmt",
+    "lint": "vp lint",
+    "test": "vp test",
+    "typecheck": "vp check --no-fmt --no-lint"
   },
   "dependencies": {
     "@json-render/core": "0.19.0",
@@ -37,6 +38,25 @@
     "@json-render/shadcn": "0.19.0",
     "@modelcontextprotocol/ext-apps": "1.7.2",
     "@modelcontextprotocol/sdk": "1.29.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.29.0",
+    "@rolldown/plugin-babel": "^0.2.3",
+    "@testing-library/jest-dom": "6.9.1",
+    "@testing-library/react": "16.3.2",
+    "@testing-library/user-event": "14.6.1",
+    "@types/babel__core": "^7.20.5",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "@vitejs/plugin-react": "6.0.2",
+    "babel-plugin-react-compiler": "1.0.0",
+    "jsdom": "29.1.1",
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
+    "typescript": "6.0.3",
+    "vite": "8.0.13",
+    "vite-plus": "0.1.21",
+    "vitest": "4.1.6"
   },
   "peerDependencies": {
     "react": "^19.0.0",
@@ -51,25 +71,5 @@
     "zod": {
       "optional": true
     }
-  },
-  "devDependencies": {
-    "@babel/core": "^7.29.0",
-    "@rolldown/plugin-babel": "^0.2.3",
-    "@testing-library/jest-dom": "6.9.1",
-    "@testing-library/react": "16.3.2",
-    "@testing-library/user-event": "14.6.1",
-    "@types/babel__core": "^7.20.5",
-    "@types/react": "19.2.14",
-    "@types/react-dom": "19.2.3",
-    "@typescript/native-preview": "7.0.0-dev.20260421.2",
-    "@vitejs/plugin-react": "6.0.2",
-    "babel-plugin-react-compiler": "1.0.0",
-    "jsdom": "29.1.1",
-    "react": "19.2.6",
-    "react-dom": "19.2.6",
-    "typescript": "6.0.3",
-    "vite": "8.0.13",
-    "vite-plus": "0.1.21",
-    "vitest": "4.1.6"
   }
 }
