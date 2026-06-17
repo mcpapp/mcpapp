@@ -15,6 +15,9 @@
     "./web": "./dist/web.mjs",
     "./package.json": "./package.json"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "vp pack",
     "check": "vp check",
