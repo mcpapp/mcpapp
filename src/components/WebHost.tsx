@@ -40,7 +40,7 @@ function stableArgsKey(args: Record<string, unknown>): string {
 export function WebHost({
   capabilities = defaultBrowserCapabilities,
   children,
-  connect = true,
+  connect = false,
   endpoint = defaultEndpoint,
   error: renderError,
   hostContext,
@@ -72,7 +72,7 @@ export function WebHost({
     }
 
     let cancelled = false;
-    const client = new Client({ name: "mcpapp-web-host", version: "0.1.0" }, { capabilities: {} });
+    const client = new Client({ name: "mcpapp-web-host", version: "0.1.1" }, { capabilities: {} });
     const transport = new StreamableHTTPClientTransport(endpointUrl(endpoint), transportOptions);
 
     clientRef.current = client;

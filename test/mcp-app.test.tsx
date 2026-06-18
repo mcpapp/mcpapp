@@ -60,13 +60,29 @@ const panelSpec: Spec = {
 describe("MCPApp", () => {
   it("renders an initial WebHost spec with json-render state bindings", () => {
     render(
-      <WebHost connect={false} initialSpec={panelSpec} registry={registry}>
+      <WebHost initialSpec={panelSpec} registry={registry}>
         <MCPApp />
       </WebHost>,
     );
 
     expect(screen.getByRole("heading", { name: "Customer profile" })).toBeInTheDocument();
     expect(screen.getByText("Ada Lovelace")).toBeInTheDocument();
+  });
+
+  it("defaults WebHost to local rendering without connecting to an MCP endpoint", () => {
+    const RuntimeState = () => {
+      const runtime = useMCPHostRuntime();
+
+      return <p>{runtime?.connecting ? "connecting" : "idle"}</p>;
+    };
+
+    render(
+      <WebHost>
+        <RuntimeState />
+      </WebHost>,
+    );
+
+    expect(screen.getByText("idle")).toBeInTheDocument();
   });
 
   it("routes spec actions to MCPApp handlers", async () => {

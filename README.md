@@ -11,14 +11,15 @@ export function App() {
 }
 ```
 
-For a normal browser page, wrap the app in `WebHost`:
+For a normal browser page, wrap the app in `WebHost` and provide a spec from
+your own runtime:
 
 ```tsx
 import { MCPApp, WebHost } from "@mcpapp/react";
 
 export function App() {
   return (
-    <WebHost>
+    <WebHost initialSpec={spec}>
       <MCPApp />
     </WebHost>
   );
@@ -27,8 +28,9 @@ export function App() {
 
 `MCPApp` handles the app-side MCP Apps lifecycle, resolves the json-render
 registry, seeds state from the active spec, and renders through
-`@json-render/react`. `WebHost` provides the browser runtime context and can
-connect to a Streamable HTTP MCP endpoint at `/mcp`.
+`@json-render/react`. `WebHost` provides the browser runtime context. It is
+local by default; pass `connect` to connect to a Streamable HTTP MCP endpoint at
+`/mcp`.
 
 ## Install
 
