@@ -1,5 +1,6 @@
 export { createMcpApp, registerJsonRenderResource, registerJsonRenderTool } from "@json-render/mcp";
 export { buildAppHtml } from "@json-render/mcp/build-app-html";
+export { extractSpec, extractSpecFromToolResult, isSpec } from "./spec";
 
 export type {
   CreateMcpAppOptions,

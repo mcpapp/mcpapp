@@ -3,6 +3,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 import { MCPApp, WebHost, useMCPHostRuntime } from "../src";
+import { extractSpec as extractServerSpec } from "../src/server";
 
 const Text = ({ element }: ComponentRenderProps<{ value: string }>) => <p>{element.props.value}</p>;
 
@@ -131,5 +132,9 @@ describe("MCPApp", () => {
     );
 
     expect(screen.getByText("links supported")).toBeInTheDocument();
+  });
+
+  it("exposes spec extraction from the server entrypoint", () => {
+    expect(extractServerSpec({ spec: panelSpec })).toBe(panelSpec);
   });
 });
