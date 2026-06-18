@@ -72,7 +72,7 @@ export function WebHost({
     }
 
     let cancelled = false;
-    const client = new Client({ name: "mcpapp-web-host", version: "0.1.1" }, { capabilities: {} });
+    const client = new Client({ name: "mcpapp-web-host", version: "0.2.0" }, { capabilities: {} });
     const transport = new StreamableHTTPClientTransport(endpointUrl(endpoint), transportOptions);
 
     clientRef.current = client;

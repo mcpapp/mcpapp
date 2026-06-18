@@ -5,7 +5,7 @@ import { extractSpec, extractSpecFromToolResult } from "./spec";
 import type { HostContext, MCPAppRuntime, Spec, ToolCaller } from "./types";
 
 const defaultAppName = "mcpapp";
-const defaultAppVersion = "0.1.1";
+const defaultAppVersion = "0.2.0";
 
 type UseNativeMCPAppOptions = {
   name?: string | undefined;
