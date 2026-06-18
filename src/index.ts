@@ -3,6 +3,7 @@
 export { MCPApp } from "./components/MCPApp";
 export { WebHost, defaultBrowserCapabilities } from "./components/WebHost";
 export { useMCPHostRuntime } from "./context";
+export { defaultWebCatalog, defaultWebSpecSchema } from "./default-web-catalog";
 export { defaultWebRegistry } from "./default-web-registry";
 export { extractSpec, extractSpecFromToolResult, isSpec } from "./spec";
 export { isError, toError } from "./errors";

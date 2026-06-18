@@ -2,8 +2,11 @@ import type { ComponentRegistry, ComponentRenderProps, Spec } from "@json-render
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
-import { MCPApp, WebHost, useMCPHostRuntime } from "../src";
-import { extractSpec as extractServerSpec } from "../src/server";
+import { defaultWebSpecSchema, MCPApp, WebHost, useMCPHostRuntime } from "../src";
+import {
+  defaultWebSpecSchema as serverDefaultWebSpecSchema,
+  extractSpec as extractServerSpec,
+} from "../src/server";
 
 const Text = ({ element }: ComponentRenderProps<{ value: string }>) => <p>{element.props.value}</p>;
 
@@ -136,5 +139,35 @@ describe("MCPApp", () => {
 
   it("exposes spec extraction from the server entrypoint", () => {
     expect(extractServerSpec({ spec: panelSpec })).toBe(panelSpec);
+  });
+
+  it("exposes the default web spec schema from package entrypoints", () => {
+    const webSpec: Spec = {
+      root: "root",
+      elements: {
+        root: {
+          type: "Stack",
+          props: { direction: "vertical", gap: "md" },
+          children: ["heading", "message"],
+          visible: true,
+        },
+        heading: {
+          type: "Heading",
+          props: { level: "h1", text: "Hello world" },
+          children: [],
+          visible: true,
+        },
+        message: {
+          type: "Text",
+          props: { text: "This MCPApp spec was validated by the default schema." },
+          children: [],
+          visible: true,
+        },
+      },
+    };
+
+    expect(defaultWebSpecSchema.parse(webSpec)).toStrictEqual(webSpec);
+    expect(serverDefaultWebSpecSchema.parse(webSpec)).toStrictEqual(webSpec);
+    expect(defaultWebSpecSchema.safeParse({ elements: {} }).success).toBe(false);
   });
 });
