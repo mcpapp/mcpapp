@@ -1,3 +1,5 @@
+"use client";
+
 export { MCPApp } from "./components/MCPApp";
 export { WebHost, defaultBrowserCapabilities } from "./components/WebHost";
 export { useMCPHostRuntime } from "./context";
